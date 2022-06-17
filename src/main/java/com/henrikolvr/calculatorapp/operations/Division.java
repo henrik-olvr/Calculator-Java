@@ -1,6 +1,6 @@
 package com.henrikolvr.calculatorapp.operations;
 
-import com.henrikolvr.calculatorapp.DivisionByZeroException;
+import com.henrikolvr.calculatorapp.exception.DivisionByZeroException;
 
 public class Division implements Operation {
     private double val1, val2;
