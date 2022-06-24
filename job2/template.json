@@ -29,7 +29,7 @@
 
     {
       "type": "ansible-local",
-      "playbook_file": "/var/lib/jenkins/workspace/job02-provision/job02/playbook.yml"
+      "playbook_file": "/var/lib/jenkins/workspace/job02-provision/job2/playbook.yml"
     },
 
     {
