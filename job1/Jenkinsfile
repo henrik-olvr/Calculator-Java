@@ -40,7 +40,7 @@ pipeline {
                         "files": [
                             {
                                 "pattern": "build/libs/calculator-app.war",
-                                "target": "art1-gradle-release-local/calculator-app.war/"
+                                "target": "art1-gradle-release-local/calculator-app/"
                             }
                         ]
                     }'''
