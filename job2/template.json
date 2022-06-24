@@ -1,0 +1,57 @@
+{
+  "variables": {
+    "dockerhub_username": "",
+    "dockerhub_password": "",
+    "dockerhub_repository": ""
+  },
+
+  "builders":[
+    {
+      "type": "docker",
+      "image": "ubuntu:20.04",
+      "commit": true,
+      "changes": [
+        "EXPOSE 8080",
+        "CMD [\"apache-tomcat-8.5.78/bin/catalina.sh\",\"run\"]"
+      ]
+    }
+  ],
+
+  "provisioners":[
+    {
+      "type": "shell",
+      "inline": [
+        "apt-get update -y",
+        "apt-get install -y python3",
+        "apt-get install -y ansible"
+      ]
+    },
+
+    {
+      "type": "ansible-local",
+      "playbook_file": "/var/lib/jenkins/workspace/job02-provision/job02/playbook.yml"
+    },
+
+    {
+      "type": "file",
+      "source": "/var/lib/jenkins/workspace/job02-provision/job1/build/libs/calculator-app.war",
+      "destination": "/apache-tomcat-8.5.78/webapps/calculator-app.war"
+    }
+
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `dockerhub_repository`}}",
+        "tag": "prod"
+      },
+      {
+        "type": "docker-push",
+        "login": true,
+        "login_username":"{{user `dockerhub_username`}}",
+        "login_password":"{{user `dockerhub_password`}}"
+      }
+    ]
+  ]
+}

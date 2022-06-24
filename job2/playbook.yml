@@ -1,0 +1,19 @@
+- name: Install openjdk and apache-tomcat
+  hosts: all
+  user: root
+
+  tasks:
+
+    - name: Install openJDK
+      apt:
+        name: openjdk-8-jdk
+        install_recomends: no
+
+    - name: Download Tomcat
+      get_url: url=https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz dest=/opt/apache-tomcat-8.5.78.tar.gz
+
+    - name: Extract archive
+      unarchive:
+        src: /opt/apache-tomcat-8.5.78.tar.gz
+        dest: /
+        remote_src: yes

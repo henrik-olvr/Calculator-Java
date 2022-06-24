@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-access')
+        DOCKERHUB_REPOSITORY_NAME = 'henrikol/calculator-app'
+    }
+
+    stages {
+
+        stage('Download Artifactory JFrog') {
+            steps{
+                rtDownload(
+                    serverId: "jfrog-artifactory-server",
+                    spec:
+                        """{
+                            "files": [
+                                {
+                                    "pattern": "calculator-app/calculator-app.war",
+                                    "target": "job01/build/libs/calculator-app.war"
+                                }
+                            ]
+                    }"""
+                )
+            }
+        }
+        stage('Packer Image DockerHub') {
+            steps {
+                sh 'packer build  -var "dockerhub_repository_name=$DOCKERHUB_REPOSITORY_NAME" -var "dockerhub_username=$DOCKERHUB_CREDENTIALS_USR" -var "dockerhub_user_password=$DOCKERHUB_CREDENTIALS_PSW" "job02/template.json"'
+            }
+        }
+
+
+    }
+}
