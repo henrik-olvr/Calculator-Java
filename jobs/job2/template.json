@@ -25,7 +25,7 @@
     {
       "type": "file",
       "source": "/var/lib/jenkins/workspace/job2-provision/job1/build/libs/calculator-app.war",
-      "destination": "/home/calculator-app.war"
+      "destination": "calculator-app.war"
     },
     {
       "type": "ansible-local",
