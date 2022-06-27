@@ -1,8 +1,8 @@
 {
   "variables": {
     "dockerhub_username": "",
-    "dockerhub_password": "",
-    "dockerhub_repository": ""
+    "dockerhub_user_password": "",
+    "dockerhub_repository_name": ""
   },
   "builders": [
     {
@@ -36,14 +36,14 @@
     [
       {
         "type": "docker-tag",
-        "repository": "{{user `dockerhub_username`}}",
+        "repository": "{{user `dockerhub_repository_name`}}",
         "tag": "calculator-app"
       },
       {
         "type": "docker-push",
         "login": true,
         "login_username": "{{user `dockerhub_username`}}",
-        "login_password": "{{user `dockerhub_password`}}"
+        "login_password": "{{user `dockerhub_user_password`}}"
       }
     ]
   ]
