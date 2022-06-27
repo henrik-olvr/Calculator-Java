@@ -36,8 +36,8 @@
     [
       {
         "type": "docker-tag",
-        "repository": "{{user `dockerhub_username`}}/art1-gradle-release-local",
-        "tag": "0.1"
+        "repository": "{{user `dockerhub_username`}}",
+        "tag": "calculator-app"
       },
       {
         "type": "docker-push",
