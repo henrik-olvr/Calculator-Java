@@ -2,41 +2,34 @@ pipeline {
     agent any
 
     environment {
-    	ARTIFACTORY_ID = 'jfrog-artifactory-server'
-        ARTIFACTORY_URL = credentials('artifactory-url')
-        ARTIFACTORY_CREDENTIALS = credentials('artifactory-credentials')
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-        DOCKERHUB_REPOSITORY = credentials('dockerhub-repository')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-access')
+        DOCKERHUB_REPOSITORY_NAME = 'henrikol/calculator-app'
     }
 
     stages {
-        stage ('Get Artifact') {
-            steps {
-		rtServer (
-		    id: env.ARTIFACTORY_ID,
-		    url: env.ARTIFACTORY_URL,
-		    username: env.ARTIFACTORY_CREDENTIALS_USR,
-		    password: env.ARTIFACTORY_CREDENTIALS_PSW
-		)
 
-                rtDownload (
-		    serverId: env.ARTIFACTORY_ID,
-		    spec: '''{
-			  "files": [
-			    {
-			      "pattern": "art1-gradle-release-local",
-			      "target": "./"
-			    }
-			  ]
-		    }'''
-		)
+        stage('Download Artifactory JFrog') {
+            steps{
+                rtDownload(
+                    serverId: "jfrog-artifactory-server",
+                    spec:
+                        """{
+                            "files": [
+                                {
+                                    "pattern": "calculator-app",
+                                    "target": "./"
+                                }
+                            ]
+                    }"""
+                )
+            }
+        }
+        stage('Packer Image DockerHub') {
+            steps {
+                sh 'packer build  -var "dockerhub_repository_name=$DOCKERHUB_REPOSITORY_NAME" -var "dockerhub_username=$DOCKERHUB_CREDENTIALS_USR" -var "dockerhub_user_password=$DOCKERHUB_CREDENTIALS_PSW" "jobs/job2/template.json"'
             }
         }
 
-        stage ('Docker Build and Deploy') {
-            steps {
-                sh 'packer build -var "dockerhub_username=$DOCKERHUB_CREDENTIALS_USR" -var "dockerhub_password=$DOCKERHUB_CREDENTIALS_PSW" -var "dockerhub_repository=$DOCKERHUB_REPOSITORY" "jobs/job2/template.json"'
-            }
-        }
+
     }
 }
