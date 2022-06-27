@@ -1,6 +1,6 @@
 ---
 - name: Install java 8
-  hosts: localhost
+  hosts: all
   become: true
 
   tasks:

@@ -24,12 +24,12 @@
     },
     {
       "type": "file",
-      "source": "/var/lib/jenkins/workspace/job02-provision/job1/build/libs/calculator-app.war",
+      "source": "calculator-app.war",
       "destination": "/home/calculator-app.war"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "/var/lib/jenkins/workspace/job02-provision/jobs/job2/playbook.yml"
+      "playbook_file": "jobs/job2/playbook.yml"
     }
   ],
   "post-processors": [
