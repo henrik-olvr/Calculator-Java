@@ -29,7 +29,7 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "/var/lib/jenkins/workspace/jobs/job2/playbook.yml"
+      "playbook_file": "jobs/job2/playbook.yaml"
     }
   ],
   "post-processors": [
