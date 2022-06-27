@@ -1,0 +1,50 @@
+{
+  "variables": {
+    "dockerhub_username": "",
+    "dockerhub_password": "",
+    "dockerhub_repository": ""
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu:20.04",
+      "commit": true,
+      "changes": [
+        "ENTRYPOINT [\"java\", \"-jar\", \"/home/calculator-app.war\"]"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "apt update",
+        "apt install -y ansible"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "calculator-app.war",
+      "destination": "/home/calculator-app.war"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "jobs/job2/playbook.yaml"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `dockerhub_username`}}/art1-gradle-release-local",
+        "tag": "0.1"
+      },
+      {
+        "type": "docker-push",
+        "login": true,
+        "login_username": "{{user `dockerhub_username`}}",
+        "login_password": "{{user `dockerhub_password`}}"
+      }
+    ]
+  ]
+}

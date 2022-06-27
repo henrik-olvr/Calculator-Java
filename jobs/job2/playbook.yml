@@ -1,0 +1,9 @@
+---
+- name: Install java 8
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Install java 8
+      apt:
+        name: openjdk-8-jre
