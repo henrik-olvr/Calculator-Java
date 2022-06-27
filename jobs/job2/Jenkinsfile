@@ -15,8 +15,8 @@ pipeline {
                         """{
                             "files": [
                                 {
-                                    "pattern": "calculator-app",
-                                    "target": "./"
+                                    "pattern": "art1-gradle-release-local/calculator-app.war",
+                                    "target": "job1/build/libs/calculator-app.war"
                                 }
                             ]
                     }"""
