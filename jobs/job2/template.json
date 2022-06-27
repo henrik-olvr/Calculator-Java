@@ -10,7 +10,7 @@
       "image": "ubuntu:20.04",
       "commit": true,
       "changes": [
-        "ENTRYPOINT [\"java\", \"-jar\", \"/home/calculator-app.war\"]"
+        "ENTRYPOINT [\"java\", \"-jar\", \"calculator-app.war\"]"
       ]
     }
   ],
@@ -24,7 +24,7 @@
     },
     {
       "type": "file",
-      "source": "calculator-app.war",
+      "source": "/var/lib/jenkins/workspace/job2-provision/job1/build/libs/calculator-app.war",
       "destination": "/home/calculator-app.war"
     },
     {
