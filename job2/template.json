@@ -1,8 +1,8 @@
 {
   "variables": {
+    "dockerhub_repository_name": "",
     "dockerhub_username": "",
     "dockerhub_user_password": "",
-    "dockerhub_repository_name": ""
   },
   "builders": [
     {
@@ -10,7 +10,8 @@
       "image": "ubuntu:20.04",
       "commit": true,
       "changes": [
-        "ENTRYPOINT [\"java\", \"-jar\", \"/home/calculator-app.war\"]"
+        "EXPOSE 8080",
+        "CMD [\"apache-tomcat-8.5.78/bin/catalina.sh\",\"run\"]"
       ]
     }
   ],
@@ -23,13 +24,13 @@
       ]
     },
     {
-      "type": "file",
-      "source": "calculator-app.war",
-      "destination": "/home/calculator-app.war"
+      "type": "ansible-local",
+      "playbook_file": "/home/luiz/.jenkins/workspace/job2-provision/job2/playbook.yml"
     },
     {
-      "type": "ansible-local",
-      "playbook_file": "jobs/job2/playbook.yml"
+      "type": "file",
+      "source": "/home/luiz/.jenkins/workspace/job2-provision/job1/build/libs/calculator-app.war",
+      "destination": "/apache-tomcat-8.5.78/webapps/calculator-app.war"
     }
   ],
   "post-processors": [
