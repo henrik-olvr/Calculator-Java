@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        ARTIFACTORY_ID = 'jfrog-artifactory-server'
-        ARTIFACTORY_URL = credentials('artifactory-url')
-        ARTIFACTORY_CREDENTIALS = credentials('artifactory-credentials')
-    }
-
     stages {
         stage ('Clone') {
             steps {
@@ -28,14 +22,8 @@ pipeline {
 
         stage ('Artifactory Deploy') {
             steps {
-                rtServer (
-                    id: env.ARTIFACTORY_ID,
-                    url: env.ARTIFACTORY_URL,
-                    username: env.ARTIFACTORY_CREDENTIALS_USR,
-                    password: env.ARTIFACTORY_CREDENTIALS_PSW
-                )
                 rtUpload (
-                    serverId: env.ARTIFACTORY_ID,
+                    serverId: "jfrog-artifactory-server",
                     spec: '''{
                         "files": [
                             {
