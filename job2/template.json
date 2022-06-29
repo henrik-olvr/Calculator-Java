@@ -1,8 +1,4 @@
 {
-  "variables": {
-    "dockerhub_username": "",
-    "dockerhub_user_password": ""
-  },
   "builders": [
     {
       "type": "docker",
@@ -39,12 +35,7 @@
         "repository": "henrikol/calculator-app",
         "tag": "calculator-app"
       },
-      {
-        "type": "docker-push",
-        "login": true,
-        "login_username": "{{user `dockerhub_username`}}",
-        "login_password": "{{user `dockerhub_user_password`}}"
-      }
+      "docker-push"
     ]
   ]
 }
