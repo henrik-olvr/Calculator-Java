@@ -1,6 +1,5 @@
 {
   "variables": {
-    "dockerhub_repository_name": "",
     "dockerhub_username": "",
     "dockerhub_user_password": ""
   },
@@ -37,7 +36,7 @@
     [
       {
         "type": "docker-tag",
-        "repository": "{{user `dockerhub_repository_name`}}",
+        "repository": "henrikol/calculator-app",
         "tag": "calculator-app"
       },
       {
