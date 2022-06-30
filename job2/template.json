@@ -33,7 +33,7 @@
       {
         "type": "docker-tag",
         "repository": "henrikol/calculator-app",
-        "tag": "latest"
+        "tags": "latest"
       },
       {
         "type": "docker-push"
