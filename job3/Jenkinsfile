@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ('Pull Image From Dockerhub') {
+            steps {
+                sh 'docker pull henrikol/calculator-app:latest'
+            }
+        }
+        stage ('Run Image Docker') {
+            steps {
+                sh 'docker run -it --rm -p 8080:8080 -d henrikol/calculator-app:latest'
+            }
+        }
+    }
+}
