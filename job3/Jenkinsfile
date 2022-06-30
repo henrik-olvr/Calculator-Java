@@ -9,7 +9,7 @@ pipeline {
         }
         stage ('Run Image Docker') {
             steps {
-                sh 'docker run -it --rm -p 8080:8080 -d henrikol/calculator-app:latest'
+                sh 'docker run -it --rm -p 8083:8080 -d henrikol/calculator-app:latest'
             }
         }
     }
