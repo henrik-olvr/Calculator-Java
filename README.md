@@ -33,10 +33,10 @@
 
 
 ## Job 2 - Provision
-**_NOTE #1: To this job you will need Docker and Packer, so you can install both via the links in "Necessary Technologies" section._**
-**_NOTE #2: After Docker installation, you'll need to open a terminal and type the command `sudo chmod 666 /var/run/docker.sock` in order
+**_`NOTE #1:` To this job you will need Docker and Packer, so you can install both via the links in "Necessary Technologies" section._**
+**_`NOTE #2:` After Docker installation, you'll need to open a terminal and type the command `sudo chmod 666 /var/run/docker.sock` in order
 to give it permission to run without a `sudo` command._**
-**_NOTE #3: Also you will need a [Dockerhub](https://hub.docker.com/) account and generate an access token._**
+**_`NOTE #3:` Also you will need a [Dockerhub](https://hub.docker.com/) account and generate an access token._**
 1. In your Dockerhub account, go to `Account settings > Security > New Access Token`
     1. Give the token a description `jenkins`
     2. In `Access Permissions`, select `Read, Write, Delete`.
